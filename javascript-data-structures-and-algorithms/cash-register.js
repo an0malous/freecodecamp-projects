@@ -1,14 +1,12 @@
+
+
 function checkCashRegister(price, cash, cid) {
   let currentChangeToGiveBack = cash - price;
   if (price === cash) {
     return { status: "CLOSED", change: [] };
   };
 
-  let totalCidVal = 0; 
-  for (let i = 0; i < cid.length; i++) {
-    totalCidVal = totalCidVal + cid[i][1];
-  };
-  totalCidVal = Math.round((totalCidVal + Number.EPSILON) * 100) / 100;
+const totalCidVal = Math.round(cid.map(item=>item[1]).reduce((acc, curr)=>acc + curr))
 
   if (totalCidVal === currentChangeToGiveBack) {
     return { status: "CLOSED", change: cid };
